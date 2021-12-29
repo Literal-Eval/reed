@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reed/screens/home_page.dart';
+import 'package:reed/utils/size_config.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -31,6 +32,13 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    SizeConfig.init(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -41,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
             'assets/lottie/car_with_singer.json',
             controller: _controller,
             animate: true,
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: SizeConfig.heightPercent * 70,
             onLoaded: (composition) {
               _controller
                 ..duration = composition.duration
