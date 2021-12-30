@@ -42,14 +42,14 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           LottieBuilder.asset(
             'assets/lottie/car_with_singer.json',
             controller: _controller,
             animate: true,
-            height: SizeConfig.heightPercent * 70,
+            height: SizeConfig.heightPercent * 80,
             onLoaded: (composition) {
               _controller
                 ..duration = composition.duration
@@ -65,6 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
           ),
           const Text(
             'Reed',
+            textAlign: TextAlign.center,
             style: TextStyle(fontFamily: 'Qualy', fontSize: 30),
           ),
         ],
