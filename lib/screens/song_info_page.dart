@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/song_info_name_tile.dart';
+import 'package:reed/widgets/song_position_painter.dart';
 
 class SongInfoPage extends StatelessWidget {
   const SongInfoPage({
@@ -23,10 +24,6 @@ class SongInfoPage extends StatelessWidget {
             vertical: SizeConfig.heightPercent * 3,
           ),
           decoration: const BoxDecoration(
-            // border: Border.all(
-            //   width: 5,
-            //   color: Colors.white,
-            // ),
             borderRadius: BorderRadius.all(
               Radius.circular(
                 50,
@@ -41,13 +38,17 @@ class SongInfoPage extends StatelessWidget {
           ),
         ),
         const SongInfoNameTile(
-          songName: 'Mr. Tamburine Man',
+          songName: 'Mr. Tambourine Man',
           albumName: 'Henlo boi',
           artistName: [
             'Yesh Man',
             'Henlo Man',
             'Go Away',
           ],
+        ),
+        const SongPositionPainter(
+          duration: 100,
+          currentPosition: 50,
         ),
       ],
     );
