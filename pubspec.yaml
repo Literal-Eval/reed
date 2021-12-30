@@ -77,10 +77,17 @@ flutter:
       fonts:
         - asset: assets/fonts/bequest_personal.otf
         # - asset: fonts/Schyler-Italic.ttf
-        #   style: italic
+        # style: italic
     - family: Qualy
       fonts:
         - asset: assets/fonts/qualy_bold.ttf
+    - family: Spacia
+      fonts:
+        - asset: assets/fonts/spacia_regular.ttf
+          # style: regular
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat
 
     # - family: Trajan Pro
     #   fonts:
