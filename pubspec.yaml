@@ -59,6 +59,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/lottie/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -87,7 +88,7 @@ flutter:
           # style: regular
     - family: Montserrat
       fonts:
-        - asset: assets/fonts/montserrat
+        - asset: assets/fonts/montserrat_regular.ttf
 
     # - family: Trajan Pro
     #   fonts:

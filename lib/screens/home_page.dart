@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/bottom_navigation_bar.dart';
 
@@ -24,8 +25,14 @@ class _HomePageState extends State<HomePage> {
           const Icon(Icons.star_border),
         ],
       ),
-      body: const Center(
-        child: Text('ravidi'),
+      body: PageView(
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: SizeConfig.widthPercent * 5),
+            child: const SongInfoPage(songData: {}),
+          ),
+        ],
       ),
       bottomNavigationBar: const CustomBottomNavigationBar(),
     );
