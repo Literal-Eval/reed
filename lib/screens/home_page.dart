@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/bottom_navigation_bar.dart';
@@ -11,6 +12,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final player = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+
+    setupAudio();
+  }
+
+  void setupAudio() async {
+    await player.setFilePath('assets/music/file.mp3');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
