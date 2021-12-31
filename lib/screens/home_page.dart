@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/bottom_navigation_bar.dart';
 
-class HomePage extends StatefulWidget {
+final audioProvider = StateProvider<AudioPlayer>((ref) {
+  return AudioPlayer();
+});
+
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-
-  final player = AudioPlayer();
+class _HomePageState extends ConsumerState<HomePage> {
 
   @override
   void initState() {
@@ -23,7 +26,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   void setupAudio() async {
-    await player.setFilePath('assets/music/file.mp3');
+    await ref.read(audioProvider.state).state.setAsset('assets/music/file.mp3');
+    ref.read(audioProvider.state).state.play();
   }
 
   @override

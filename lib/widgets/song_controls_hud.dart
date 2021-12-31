@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reed/screens/home_page.dart';
 import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/utils/size_config.dart';
 
@@ -30,38 +31,40 @@ class SongControlsHud extends StatelessWidget {
             Icons.arrow_back_ios_new_rounded,
           ),
         ),
-        Container(
-          width: SizeConfig.widthPercent * 16,
-          height: SizeConfig.widthPercent * 16,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white.withAlpha(150),
-                blurRadius: 12,
-                spreadRadius: 4,
-              ),
-            ],
-          ),
-          child: Center(
-            child: Consumer(
-              builder: (context, ref, child) {
-                bool isPlaying = ref.watch(isPlayingProvider);
-                isPlayingProvider.state;
-                return GestureDetector(
-                  onTap: () {
-                    ref.read(isPlayingProvider.state).state = !isPlaying;
-                  },
+        Consumer(
+          builder: (context, ref, child) {
+            bool isPlaying = ref.watch(isPlayingProvider);
+            return GestureDetector(
+              onTap: () {
+                ref.read(isPlayingProvider.state).state = !isPlaying;
+                final audioState = ref.read(audioProvider.state).state;
+
+                isPlaying ? audioState.pause() : audioState.play();
+              },
+              child: Container(
+                width: SizeConfig.widthPercent * 16,
+                height: SizeConfig.widthPercent * 16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white.withAlpha(150),
+                      blurRadius: 12,
+                      spreadRadius: 4,
+                    ),
+                  ],
+                ),
+                child: Center(
                   child: Icon(
                     isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
                     size: SizeConfig.widthPercent * 8,
                     color: Colors.black,
                   ),
-                );
-              },
-            ),
-          ),
+                ),
+              ),
+            );
+          },
         ),
         const Expanded(
           flex: 3,
