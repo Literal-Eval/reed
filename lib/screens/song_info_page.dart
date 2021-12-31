@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reed/screens/home_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/song_controls_hud.dart';
 import 'package:reed/widgets/song_info_name_tile.dart';
@@ -56,10 +57,7 @@ class SongInfoPage extends StatelessWidget {
             'Go Away',
           ],
         ),
-        const SongPositionPainter(
-          duration: 100,
-          currentPosition: 50,
-        ),
+        const SongPositionPainter(),
         const SongControlsHud(),
       ],
     );

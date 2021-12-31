@@ -1,52 +1,74 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:reed/screens/home_page.dart';
 import 'package:reed/utils/size_config.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SongPositionPainter extends StatefulWidget {
+class SongPositionPainter extends ConsumerStatefulWidget {
   const SongPositionPainter({
-    required this.duration,
-    required this.currentPosition,
     Key? key,
   }) : super(key: key);
-
-  final int duration;
-  final int currentPosition;
 
   @override
   _SongPositionPainterState createState() => _SongPositionPainterState();
 }
 
-class _SongPositionPainterState extends State<SongPositionPainter> {
+class _SongPositionPainterState extends ConsumerState<SongPositionPainter> {
+  String parseSeconds(int seconds) {
+    if (seconds ~/ 60 == 0) {
+      return '00:$seconds';
+    } else if (seconds ~/ 600 == 0) {
+      return '0${seconds ~/ 60}:${seconds % 60}';
+    } else if (seconds ~/ 3600 == 0) {
+      return '${seconds ~/ 60}:${seconds % 60}';
+    }
+    return '';
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomPaint(
-          painter: SongPositionBackgroundPainter(
-            duration: 50,
-          ),
-          child: SizedBox(
-            width: double.infinity,
-            height: SizeConfig.heightPercent * 10,
-          ),
-          foregroundPainter: SongPositionForegroundPainter(
-            duration: 50,
-            currentPosition: 20,
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return StreamBuilder<Duration>(
+      stream: ref.watch(audioProvider.state).state.positionStream,
+      builder: (context, snapshot) {
+        return Column(
           children: [
-            Text(
-              widget.currentPosition.toString(),
+            CustomPaint(
+              painter: SongPositionBackgroundPainter(
+                duration:
+                    ref.watch(audioProvider.state).state.duration?.inSeconds ??
+                        1,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                height: SizeConfig.heightPercent * 10,
+              ),
+              foregroundPainter: SongPositionForegroundPainter(
+                duration:
+                    ref.watch(audioProvider.state).state.duration?.inSeconds ??
+                        1,
+                currentPosition: snapshot.data?.inMilliseconds ?? 0,
+              ),
             ),
-            Text(
-              widget.duration.toString(),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  parseSeconds(snapshot.data?.inSeconds ?? 0),
+                ),
+                Text(
+                  parseSeconds(ref
+                          .watch(audioProvider.state)
+                          .state
+                          .duration
+                          ?.inSeconds ??
+                      0),
+                ),
+              ],
+            )
           ],
-        )
-      ],
+        );
+      },
     );
   }
 }
@@ -104,6 +126,6 @@ class SongPositionForegroundPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant SongPositionForegroundPainter oldDelegate) {
-    return true;
+    return oldDelegate.currentPosition != currentPosition;
   }
 }
