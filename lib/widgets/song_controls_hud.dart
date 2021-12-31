@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:reed/utils/size_config.dart';
 
 class SongControlsHud extends StatelessWidget {
-  const SongControlsHud({Key? key}) : super(key: key);
+  const SongControlsHud({
+    required this.isPlaying,
+    required this.isSuffled,
+    Key? key,
+  }) : super(key: key);
+
+  final bool isPlaying;
+  final bool isSuffled;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Icon(Icons.arrow_drop_down_circle_outlined),
-        const Icon(Icons.arrow_back_ios_new_rounded),
+        const Expanded(
+          flex: 5,
+          child: Icon(
+            Icons.arrow_drop_down_circle_outlined,
+          ),
+        ),
+        const Expanded(
+          flex: 3,
+          child: Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
         Container(
           width: SizeConfig.widthPercent * 16,
           height: SizeConfig.widthPercent * 16,
@@ -20,20 +37,31 @@ class SongControlsHud extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.white.withAlpha(150),
-                blurRadius: 10,
-                spreadRadius: 2,
+                blurRadius: 12,
+                spreadRadius: 4,
               ),
             ],
           ),
-          child: const Center(
+          child: Center(
             child: Icon(
-              Icons.pause,
+              isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+              size: SizeConfig.widthPercent * 8,
               color: Colors.black,
             ),
           ),
         ),
-        const Icon(Icons.arrow_forward_ios_outlined),
-        const Icon(Icons.shuffle),
+        const Expanded(
+          flex: 3,
+          child: Icon(
+            Icons.arrow_forward_ios_outlined,
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Icon(
+            isSuffled ? Icons.shuffle_on_rounded : Icons.shuffle,
+          ),
+        ),
       ],
     );
   }

@@ -51,7 +51,10 @@ class SongInfoPage extends StatelessWidget {
           duration: 100,
           currentPosition: 50,
         ),
-        const SongControlsHud(),
+        const SongControlsHud(
+          isPlaying: false,
+          isSuffled: true,
+        ),
       ],
     );
   }

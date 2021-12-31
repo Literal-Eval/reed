@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reed/constants/colors.dart';
 import 'package:reed/screens/home_page.dart';
 import 'package:reed/utils/size_config.dart';
 
 void main() => runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: kBackgroundColor,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: kBackgroundColor,
-            titleTextStyle: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Montserrat',
+      ProviderScope(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: kBackgroundColor,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: kBackgroundColor,
+              titleTextStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: kBackgroundColor,
             ),
           ),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: kBackgroundColor,
-          ),
+          home: const SplashScreen(),
         ),
-        home: const SplashScreen(),
       ),
     );
 
