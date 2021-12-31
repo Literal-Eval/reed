@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/utils/size_config.dart';
 
 class SongControlsHud extends StatelessWidget {
   const SongControlsHud({
-    required this.isPlaying,
-    required this.isSuffled,
+    // this.isPlaying,
+    // this.isSuffled,
     Key? key,
   }) : super(key: key);
 
-  final bool isPlaying;
-  final bool isSuffled;
+  // final bool? isPlaying;
+  // final bool? isSuffled;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +45,21 @@ class SongControlsHud extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: Icon(
-              isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-              size: SizeConfig.widthPercent * 8,
-              color: Colors.black,
+            child: Consumer(
+              builder: (context, ref, child) {
+                bool isPlaying = ref.watch(isPlayingProvider);
+                isPlayingProvider.state;
+                return GestureDetector(
+                  onTap: () {
+                    ref.read(isPlayingProvider.state).state = !isPlaying;
+                  },
+                  child: Icon(
+                    isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                    size: SizeConfig.widthPercent * 8,
+                    color: Colors.black,
+                  ),
+                );
+              },
             ),
           ),
         ),
@@ -58,8 +71,18 @@ class SongControlsHud extends StatelessWidget {
         ),
         Expanded(
           flex: 5,
-          child: Icon(
-            isSuffled ? Icons.shuffle_on_rounded : Icons.shuffle,
+          child: Consumer(
+            builder: (context, ref, child) {
+              bool isSuffled = ref.watch(isSuffledProvider);
+              return GestureDetector(
+                onTap: () {
+                  ref.read(isSuffledProvider.state).state = !isSuffled;
+                },
+                child: Icon(
+                  isSuffled ? Icons.shuffle_on_rounded : Icons.shuffle,
+                ),
+              );
+            },
           ),
         ),
       ],
