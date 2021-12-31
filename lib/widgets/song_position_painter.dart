@@ -16,14 +16,15 @@ class SongPositionPainter extends ConsumerStatefulWidget {
 
 class _SongPositionPainterState extends ConsumerState<SongPositionPainter> {
   String parseSeconds(int seconds) {
-    if (seconds ~/ 60 == 0) {
-      return '00:$seconds';
-    } else if (seconds ~/ 600 == 0) {
-      return '0${seconds ~/ 60}:${seconds % 60}';
-    } else if (seconds ~/ 3600 == 0) {
-      return '${seconds ~/ 60}:${seconds % 60}';
+    if (seconds ~/ 3600 == 0) {
+      return '${padInt(seconds ~/ 60)}:${padInt(seconds % 60)}';
+    } else {
+      return '${seconds ~/ 3600}:${padInt(seconds ~/ 60)}:${padInt(seconds % 60)}';
     }
-    return '';
+  }
+
+  String padInt(int num) {
+    return (num < 9) ? '0$num' : '$num';
   }
 
   @override
