@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:reed/constants/colors.dart';
 import 'package:reed/screens/home_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,8 +38,9 @@ class _SongPositionPainterState extends ConsumerState<SongPositionPainter> {
             CustomPaint(
               painter: SongPositionBackgroundPainter(
                 duration:
-                    ref.watch(audioProvider.state).state.duration?.inSeconds ??
+                    ref.read(audioProvider.state).state.duration?.inSeconds ??
                         1,
+                currentPosition: snapshot.data?.inMilliseconds ?? 0,
               ),
               child: SizedBox(
                 width: double.infinity,
@@ -77,39 +79,42 @@ class _SongPositionPainterState extends ConsumerState<SongPositionPainter> {
 class SongPositionBackgroundPainter extends CustomPainter {
   SongPositionBackgroundPainter({
     required this.duration,
+    required this.currentPosition,
   });
 
   final int duration;
+  final int currentPosition;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final path = Path();
-    final randGen = Random(DateTime.now().millisecondsSinceEpoch);
+    canvas.drawRect(
+      Rect.fromLTWH(
+        0,
+        15,
+        size.width,
+        size.height - 30,
+      ),
+      Paint()
+        ..style = PaintingStyle.fill
+        ..color = kInactiveIconColor,
+    );
 
-    path.moveTo(0, size.height / 2);
-
-    for (int i = 0; i < size.width - 20; i += 20) {
-      path.quadraticBezierTo(
-        i + 10,
-        (i % 40) == 0
-            ? randGen.nextInt(size.height ~/ 2).toDouble()
-            : randGen.nextInt(size.height ~/ 2) + size.height / 2,
-        (i + 20).toDouble(),
-        size.height / 2,
-      );
-    }
-
-    final paint = Paint()
-      ..strokeWidth = 4
-      ..color = Colors.red
-      ..style = PaintingStyle.stroke;
-
-    canvas.drawPath(path, paint);
+    canvas.drawRect(
+      Rect.fromLTWH(
+        0,
+        15,
+        (currentPosition / (duration * 1000)) * size.width,
+        size.height - 30,
+      ),
+      Paint()
+        ..style = PaintingStyle.fill
+        ..color = Colors.red,
+    );
   }
 
   @override
   bool shouldRepaint(covariant SongPositionBackgroundPainter oldDelegate) {
-    return oldDelegate.duration != duration;
+    return oldDelegate.currentPosition != currentPosition;
   }
 }
 
@@ -123,10 +128,69 @@ class SongPositionForegroundPainter extends CustomPainter {
   final int currentPosition;
 
   @override
-  void paint(Canvas canvas, Size size) {}
+  void paint(Canvas canvas, Size size) {
+    final upperPath = Path();
+    final randGen = Random(DateTime.now().millisecondsSinceEpoch);
+
+    upperPath.moveTo(0, 10);
+    upperPath.lineTo(0, size.height / 2);
+
+    for (int i = 0; i < size.width - 40; i += 20) {
+      upperPath.quadraticBezierTo(
+        i + 10,
+        randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
+        i + 20,
+        randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
+      );
+    }
+
+    upperPath.quadraticBezierTo(
+      size.width - 10,
+      randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
+      size.width,
+      size.height / 2,
+    );
+    upperPath.lineTo(size.width, 10);
+    upperPath.lineTo(0, 10);
+
+    final lowerPath = Path();
+
+    lowerPath.moveTo(0, size.height / 2);
+
+    for (int i = 0; i < size.width - 40; i += 20) {
+      lowerPath.quadraticBezierTo(
+        i + 10,
+        size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
+        i + 20,
+        size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
+      );
+    }
+
+    lowerPath.quadraticBezierTo(
+      size.width - 10,
+      size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
+      size.width,
+      size.height / 2,
+    );
+    lowerPath.lineTo(size.width, size.height - 10);
+    lowerPath.lineTo(0, size.height - 10);
+
+    final paint = Paint()
+      ..strokeWidth = 4
+      ..color = kBackgroundColor
+      ..style = PaintingStyle.stroke;
+
+    // canvas.drawPath(upperPath, paint);
+    paint.style = PaintingStyle.fill;
+    canvas.drawPath(upperPath, paint);
+
+    // canvas.drawPath(lowerPath, paint);
+    paint.style = PaintingStyle.fill;
+    canvas.drawPath(lowerPath, paint);
+  }
 
   @override
   bool shouldRepaint(covariant SongPositionForegroundPainter oldDelegate) {
-    return oldDelegate.currentPosition != currentPosition;
+    return oldDelegate.duration != duration;
   }
 }

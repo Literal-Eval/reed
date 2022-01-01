@@ -50,12 +50,8 @@ class SongInfoPage extends StatelessWidget {
         ),
         const SongInfoNameTile(
           songName: 'Mr. Tambourine Man',
-          albumName: 'Henlo boi',
-          artistName: [
-            'Yesh Man',
-            'Henlo Man',
-            'Go Away',
-          ],
+          albumName: 'Bringing It All Back Home',
+          artistName: ['Bob Dylan'],
         ),
         const SongPositionPainter(),
         const SongControlsHud(),

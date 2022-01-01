@@ -23,22 +23,30 @@ class SongInfoNameTile extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              songName,
-              style: const TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: SizeConfig.widthPercent * 70,
+              child: Text(
+                songName,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(
               height: SizeConfig.heightPercent * 1,
             ),
-            Text(
-              albumName,
-              style: const TextStyle(
-                fontSize: 18,
-                color: Color(0xFFFF451C),
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: SizeConfig.widthPercent * 60,
+              child: Text(
+                albumName,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFFFF451C),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(
