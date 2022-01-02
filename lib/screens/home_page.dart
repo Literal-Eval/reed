@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reed/screens/song_info_page.dart';
+import 'package:reed/screens/song_list_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/bottom_navigation_bar.dart';
 
@@ -26,7 +27,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
   void setupAudio() async {
     await ref.read(audioProvider.state).state.setAsset('assets/music/file.mp3');
-    ref.read(audioProvider.state).state.play();
+    // ref.read(audioProvider.state).state.play();
   }
 
   @override
@@ -34,21 +35,15 @@ class _HomePageState extends ConsumerState<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Now Playing'),
-        actions: [
-          const Icon(Icons.screen_share),
-          SizedBox(
-            width: SizeConfig.widthPercent * 5,
-          ),
-          const Icon(Icons.star_border),
-        ],
+        title: const Text('REED'),
       ),
       body: PageView(
         children: [
           Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: SizeConfig.widthPercent * 5),
-            child: const SongInfoPage(songData: {}),
+            // child: const SongInfoPage(songData: {}),
+            child: const SongListPage(),
           ),
         ],
       ),
