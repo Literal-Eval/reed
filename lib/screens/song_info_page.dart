@@ -65,10 +65,10 @@ class SongInfoPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SongInfoNameTile(
-              songName: 'Mr. Tambourine Man',
-              albumName: 'Bringing It All Back Home',
-              artistName: ['Bob Dylan'],
+            SongInfoNameTile(
+              songName: songData.name,
+              albumName: songData.album,
+              artistName: songData.artists,
             ),
             const SongPositionPainter(),
             const SongControlsHud(),

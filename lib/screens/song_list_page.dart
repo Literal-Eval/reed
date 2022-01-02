@@ -15,67 +15,67 @@ class _SongListPageState extends State<SongListPage> {
     Song(
         name: 'Hey boi ravidi bo',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi boi',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi bois',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi boiss',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi b',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi man',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi mans',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi mao',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi lao',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi tao',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi pao',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi ching',
         album: 'henlo bois',
-        arists: ['ravidi, shaikh'],
+        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
   ];
 
@@ -101,7 +101,7 @@ class _SongListPageState extends State<SongListPage> {
               },
               child: SongTile(
                 songName: songList[index].name,
-                artists: songList[index].arists,
+                artists: songList[index].artists,
                 imagePath: 'assets/images/dummy_image.jpeg',
                 isLiked: false,
               ),
