@@ -21,11 +21,13 @@ class SongTile extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Row(
+        // mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Hero(
             tag: songName,
             child: CircleAvatar(
-              backgroundImage: const AssetImage('assets/images/dummy_image.jpeg'),
+              backgroundImage:
+                  const AssetImage('assets/images/dummy_image.jpeg'),
               radius: SizeConfig.widthPercent * 7,
             ),
           ),
@@ -56,12 +58,17 @@ class SongTile extends StatelessWidget {
               isLiked ? Icons.health_and_safety_rounded : Icons.hearing,
             ),
             onPressed: () {},
+            padding: const EdgeInsets.all(0.0),
+            iconSize: 20,
+            splashColor: Colors.red,
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.electric_scooter,
             ),
+            padding: const EdgeInsets.all(0.0),
+            iconSize: 20,
           )
         ],
       ),

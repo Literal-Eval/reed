@@ -41,7 +41,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         children: [
           Padding(
             padding:
-                EdgeInsets.symmetric(horizontal: SizeConfig.widthPercent * 5),
+                EdgeInsets.symmetric(horizontal: SizeConfig.widthPercent * 4),
             // child: const SongInfoPage(songData: {}),
             child: const SongListPage(),
           ),

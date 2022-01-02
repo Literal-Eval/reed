@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:reed/constants/colors.dart';
 import 'package:reed/models/song.dart';
 import 'package:reed/screens/song_info_page.dart';
+import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/song_tile.dart';
 
 class SongListPage extends StatefulWidget {
@@ -86,8 +88,7 @@ class _SongListPageState extends State<SongListPage> {
         itemCount: songList.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -99,11 +100,21 @@ class _SongListPageState extends State<SongListPage> {
                   ),
                 );
               },
-              child: SongTile(
-                songName: songList[index].name,
-                artists: songList[index].artists,
-                imagePath: 'assets/images/dummy_image.jpeg',
-                isLiked: false,
+              child: Column(
+                children: [
+                  SongTile(
+                    songName: songList[index].name,
+                    artists: songList[index].artists,
+                    imagePath: 'assets/images/dummy_image.jpeg',
+                    isLiked: false,
+                  ),
+                  Divider(
+                    color: kInactiveIconColor,
+                    indent: SizeConfig.widthPercent * 5,
+                    endIndent: SizeConfig.widthPercent * 5,
+                    height: SizeConfig.heightPercent * 2,
+                  ),
+                ],
               ),
             ),
           );
