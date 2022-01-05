@@ -37,6 +37,7 @@ dependencies:
   flutter_riverpod: ^1.0.3
   just_audio: ^0.9.18
   flutter_media_metadata: ^0.1.2
+  just_waveform: ^0.0.1
 
 dev_dependencies:
   flutter_test:
