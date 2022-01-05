@@ -45,8 +45,8 @@ class SongInfoPage extends StatelessWidget {
             Hero(
               tag: songData.name,
               child: Container(
-                width: SizeConfig.widthPercent * 60,
-                height: SizeConfig.widthPercent * 60,
+                width: SizeConfig.widthPercent * 70,
+                height: SizeConfig.widthPercent * 70,
                 padding: EdgeInsets.symmetric(
                   vertical: SizeConfig.heightPercent * 3,
                 ),
@@ -70,8 +70,8 @@ class SongInfoPage extends StatelessWidget {
               albumName: songData.album,
               artistName: songData.artists,
             ),
-            const SongPositionPainter(),
             const SongControlsHud(),
+            const SongPositionPainter(),
           ],
         ),
       ),
