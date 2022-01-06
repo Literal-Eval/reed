@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:reed/screens/song_info_page.dart';
 import 'package:reed/screens/song_list_page.dart';
 import 'package:reed/utils/size_config.dart';
 import 'package:reed/widgets/bottom_navigation_bar.dart';

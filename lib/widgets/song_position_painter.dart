@@ -87,29 +87,14 @@ class SongPositionBackgroundPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawRect(
-      Rect.fromLTWH(
-        0,
-        15,
-        size.width,
-        size.height - 30,
-      ),
-      Paint()
-        ..style = PaintingStyle.fill
-        ..color = kInactiveIconColor,
-    );
+    final lineWidth = SizeConfig.widthPercent * 1;
+    final paint = Paint()
+      ..color = kInactiveIconColor
+      ..strokeWidth = lineWidth
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
 
-    canvas.drawRect(
-      Rect.fromLTWH(
-        0,
-        15,
-        (currentPosition / (duration * 1000)) * size.width,
-        size.height - 30,
-      ),
-      Paint()
-        ..style = PaintingStyle.fill
-        ..color = Colors.red,
-    );
+    canvas.drawPath(CustomPath.getPath(size, currentPosition), paint);
   }
 
   @override
@@ -129,68 +114,54 @@ class SongPositionForegroundPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final upperPath = Path();
-    final randGen = Random(DateTime.now().millisecondsSinceEpoch);
-
-    upperPath.moveTo(0, 10);
-    upperPath.lineTo(0, size.height / 2);
-
-    for (int i = 0; i < size.width - 40; i += 20) {
-      upperPath.quadraticBezierTo(
-        i + 10,
-        randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
-        i + 20,
-        randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
-      );
-    }
-
-    upperPath.quadraticBezierTo(
-      size.width - 10,
-      randGen.nextInt(size.height ~/ 2 - 20).toDouble() + 20,
-      size.width,
-      size.height / 2,
-    );
-    upperPath.lineTo(size.width, 10);
-    upperPath.lineTo(0, 10);
-
-    final lowerPath = Path();
-
-    lowerPath.moveTo(0, size.height / 2);
-
-    for (int i = 0; i < size.width - 40; i += 20) {
-      lowerPath.quadraticBezierTo(
-        i + 10,
-        size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
-        i + 20,
-        size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
-      );
-    }
-
-    lowerPath.quadraticBezierTo(
-      size.width - 10,
-      size.height / 2 + randGen.nextInt(size.height ~/ 2 - 20).toDouble(),
-      size.width,
-      size.height / 2,
-    );
-    lowerPath.lineTo(size.width, size.height - 10);
-    lowerPath.lineTo(0, size.height - 10);
-
+    final lineWidth = SizeConfig.widthPercent * 1;
     final paint = Paint()
-      ..strokeWidth = 4
-      ..color = kBackgroundColor
+      ..color = Colors.red
+      ..strokeWidth = lineWidth
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
-    // canvas.drawPath(upperPath, paint);
-    paint.style = PaintingStyle.fill;
-    canvas.drawPath(upperPath, paint);
+    canvas.clipRect(
+      Rect.fromLTWH(0, 0, size.width * (currentPosition / (duration * 1000)),
+          size.height),
+    );
 
-    // canvas.drawPath(lowerPath, paint);
-    paint.style = PaintingStyle.fill;
-    canvas.drawPath(lowerPath, paint);
+    canvas.drawPath(CustomPath.getPath(size, currentPosition), paint);
   }
 
   @override
   bool shouldRepaint(covariant SongPositionForegroundPainter oldDelegate) {
-    return oldDelegate.duration != duration;
+    return oldDelegate.currentPosition != currentPosition;
   }
+}
+
+class CustomPath {
+  static Path path = Path();
+  static int oldTime = 0;
+
+  static Path getPath(Size size, int time) {
+    if (time == oldTime) {
+      return path;
+    }
+
+    oldTime = time;
+    final randGen = Random(DateTime.now().millisecondsSinceEpoch);
+    path.reset();
+
+    double barHeight = 0;
+    double startPos = 0;
+
+    for (double i = 2; i < size.width; i += SizeConfig.widthPercent * 2) {
+      barHeight = randGen
+              .nextInt((size.height - SizeConfig.heightPercent * 5).toInt()) +
+          SizeConfig.heightPercent * 2;
+      startPos = size.height / 2 - barHeight / 2;
+      path.moveTo(i, startPos);
+      path.lineTo(i, startPos + barHeight);
+    }
+
+    return path;
+  }
+
+  void generatePath() {}
 }
