@@ -15,9 +15,9 @@ class SongListPage extends StatefulWidget {
 class _SongListPageState extends State<SongListPage> {
   final List<Song> songList = [
     Song(
-        name: 'Mr. Tambourine Man',
-        album: 'Bringing It All Back Home',
-        artists: ['Bob Dylan'],
+        name: 'Sia',
+        album: 'This Is acting',
+        artists: ['Sia'],
         path: 'assets/music/file.mp3'),
     Song(
         name: 'Hey boi ravidi bo',
