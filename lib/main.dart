@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
+import 'package:path_provider/path_provider.dart' as path_pro;
 import 'package:reed/constants/colors.dart';
+import 'package:reed/models/song.dart';
 import 'package:reed/screens/home_page.dart';
 import 'package:reed/utils/size_config.dart';
 
@@ -38,6 +41,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
+  late final bool loaded;
 
   @override
   void initState() {
@@ -47,6 +51,16 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
       duration: const Duration(seconds: 5),
     );
+
+    initData();
+  }
+
+  Future <void> initData() async {
+    Hive.init((await path_pro.getApplicationDocumentsDirectory()).path);
+    Hive.registerAdapter(SongAdapter());
+    setState(() {
+      loaded = true;
+    });
   }
 
   @override

@@ -38,6 +38,11 @@ dependencies:
   just_audio: ^0.9.18
   flutter_media_metadata: ^0.1.2
   just_waveform: ^0.0.1
+  uuid: ^3.0.5
+  hive: ^2.0.5
+  hive_generator: ^1.1.1
+  path_provider: ^2.0.8
+  build_runner: ^2.1.7
 
 dev_dependencies:
   flutter_test:
