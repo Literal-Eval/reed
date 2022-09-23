@@ -38,41 +38,43 @@ class SongInfoPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthPercent * 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Hero(
-              tag: songData.name,
-              child: Container(
-                width: SizeConfig.widthPercent * 70,
-                height: SizeConfig.widthPercent * 70,
-                padding: EdgeInsets.symmetric(
-                  vertical: SizeConfig.heightPercent * 3,
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      50,
-                    ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Hero(
+                tag: songData.name,
+                child: Container(
+                  width: SizeConfig.widthPercent * 70,
+                  height: SizeConfig.widthPercent * 70,
+                  padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.heightPercent * 3,
                   ),
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/images/dummy_image.jpeg',
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        50,
+                      ),
                     ),
-                    fit: BoxFit.cover,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/dummy_image.jpeg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SongInfoNameTile(
-              songName: songData.name,
-              albumName: songData.album,
-              artistName: songData.artists,
-            ),
-            const SongControlsHud(),
-            const SongPositionPainter(),
-          ],
+              SongInfoNameTile(
+                songName: songData.name,
+                albumName: songData.album,
+                artistName: songData.artists,
+              ),
+              const SongControlsHud(),
+              const SongPositionPainter(),
+            ],
+          ),
         ),
       ),
     );
