@@ -15,74 +15,9 @@ class SongListPage extends StatefulWidget {
 class _SongListPageState extends State<SongListPage> {
   final List<Song> songList = [
     Song(
-        name: 'Sia',
+        name: 'Cheap Thrills',
         album: 'This Is acting',
         artists: ['Sia'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi bo',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi boi',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi bois',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi boiss',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi b',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi man',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi mans',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi mao',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi lao',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi tao',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi pao',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
-        path: 'assets/music/file.mp3'),
-    Song(
-        name: 'Hey boi ravidi ching',
-        album: 'henlo bois',
-        artists: ['ravidi, shaikh'],
         path: 'assets/music/file.mp3'),
   ];
 
